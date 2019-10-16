@@ -13,7 +13,9 @@ signumA :: Double -> Int
 signumA 0 = 0
 signumA a = if a > 0
     then 1
-    else -1
+    else if a < 0
+    then -1
+    else 0
 
 signumA' :: Double -> Int
 signumA' a
@@ -24,10 +26,10 @@ signumA' a
 tell_bmi :: Double -> Double -> String
 -- tell_bmi h w = if w/(h^2)<=18.5 then "you are underweight" else if w/(h^2)<25 then "you have normal weight" else "you are overweight"
 tell_bmi h w
-    = let bmi x y = y/(x^2)
+    = let bmi = w/(h^2)
     in case () of
-        _ | bmi h w <= skinny  -> s ++ " underweight"
-          | bmi h w < normal  -> s ++ " normal"
+        _ | bmi <= skinny  -> s ++ " underweight"
+          | bmi < normal  -> s ++ " normal"
           | otherwise       -> s ++ " overweght"
     where
         s = "you are"
