@@ -24,10 +24,26 @@ rev''' = foldl (\a x -> x:a) []
 
 -- Exercise 3
 
-fibAux n result previous
-    | n == 0 = result
-    | otherwise = fibAux (n-1) (result + previous) result
+fib n
+    | n == 0 = 1
+    | otherwise = fib' n 1 0 where
+        fib' n result previous
+            | n == 0 = result
+            | otherwise = fib' (n-1) (result+previous) result
 
-fibTail n
-    | n == 0 = 0
-    | otherwise = fibAux n 1 0
+-- Exrecise 4
+
+-- a
+coprime :: Int -> Int -> Bool
+coprime a b = gcd a b == 1
+totient n = length [x | x <- [1..n], coprime x n]
+
+-- b
+totient_sum n = sum (map totient [x | x <- [1..n], n `rem` x == 0])
+totient_sum' n = n
+
+-- Exercise 5
+oneway [] = [[]]
+oneway xs = xs:oneway(tail xs)
+
+otherway xs []
