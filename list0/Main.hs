@@ -40,3 +40,10 @@ tell_bmi h w
 if' :: Bool -> a -> a -> a
 if' True x _ = x
 if' False _ y = y
+
+
+dupa d =
+    let z = x*x
+    in f d
+        |d > z = "dupa"
+        |otherwise = "cipa"
