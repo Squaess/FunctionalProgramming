@@ -14,3 +14,9 @@ b_conn = Node
 instance Foldable Tree where
     foldr f z (Leaf x) = f x z
     foldr f z (Node left root right) = foldr f (f root (foldr f z right)) left
+
+count_n_l :: Tree a -> (Int, Int)
+count_n_l (Leaf a) = (0, 1)
+count_n_l (Node l x r) = (lN + 1 + rN, lL+rL) where
+    (lN, lL) = count_n_l l
+    (rN, rL) = count_n_l r
