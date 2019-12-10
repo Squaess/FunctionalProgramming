@@ -20,3 +20,15 @@ count_n_l (Leaf a) = (0, 1)
 count_n_l (Node l x r) = (lN + 1 + rN, lL+rL) where
     (lN, lL) = count_n_l l
     (rN, rL) = count_n_l r
+
+instance Functor Tree where
+  fmap f (Leaf x)       = Leaf (f x)
+  fmap f (Node l x r) = Node (fmap f l) (f x) (fmap f r)
+
+contains :: Eq a => a -> Tree a -> Bool
+contains x (Leaf a) = x == a
+contains a (Node l x r) = a == x || contains a l || contains a r
+
+height :: Tree a -> Int
+height (Leaf _) = 0
+height (Node l _ r) = max (height l) (height r) + 1
